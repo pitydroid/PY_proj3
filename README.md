@@ -1,6 +1,6 @@
-# Mi Blog con Django
+# El taller interior
 
-Este es un proyecto simple de Blog desarrollado con Django como parte de un ejercicio de aprendizaje. Demuestra el uso del patrón MVT, herencia de plantillas, modelos, formularios y una función de búsqueda básica.
+Este repositorio contiene el código fuente de "El Taller Interior", un blog dedicado a la motivación y el desarrollo personal. El proyecto está construido con Django y sirvió como ejercicio práctico para implementar características fundamentales como el patrón MVT, herencia de plantillas, modelos de base de datos, formularios de entrada y búsqueda.
 
 ## Requisitos Previos
 
