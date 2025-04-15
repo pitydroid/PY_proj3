@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Resultados de Búsqueda - ETI{% endblock %}
+
+{% block content %}
+<h2>Resultados de Búsqueda</h2>
+
+{# Mostrar el formulario de búsqueda de nuevo #}
+<div class="search-form">
+    <form method="get" action="{% url 'search' %}">
+        {{ search_form.as_p }}
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+
+{% if results %}
+    <h3>Posts encontrados para "{{ query }}":</h3>
+    <ul>
+        {% for post in results %}
+            <li>
+                <h4>{{ post.title }}</h4>
+                <p>Por {{ post.author.name }} - {{ post.publication_date|date:"d M Y" }}</p>
+                <p>{{ post.content|truncatewords:20 }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No se encontraron posts que coincidan con tu búsqueda "{{ query }}".</p>
+{% endif %}
+
+<p><a href="{% url 'home' %}">Volver al inicio</a></p>
+{% endblock %}

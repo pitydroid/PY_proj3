@@ -1,0 +1,9 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Éxito - ETI{% endblock %}
+
+{% block content %}
+<h2>¡Operación Exitosa!</h2>
+<p>{{ message }}</p> {# Pasaremos un mensaje desde la vista #}
+<p><a href="{% url 'home' %}">Volver al inicio</a></p>
+{% endblock %}

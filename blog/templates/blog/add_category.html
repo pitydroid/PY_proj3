@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Añadir Categoría - ETI{% endblock %}
+
+{% block content %}
+<h2>Añadir Nueva Categoría</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar Categoría</button>
+</form>
+<p><a href="{% url 'home' %}">Volver al inicio</a></p>
+{% endblock %}

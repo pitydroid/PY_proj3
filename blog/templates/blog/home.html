@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Inicio - ETI{% endblock %}
+
+{% block content %}
+<h2>Bienvenido a El taller interior</h2>
+<p>Utiliza la navegación para añadir contenido o buscar posts.</p>
+
+<h3>Últimos Posts</h3>
+{% if latest_posts %}
+    <ul>
+        {% for post in latest_posts %}
+        <li>
+            <h4><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h4> <p>Por {{ post.author.name }} en {{ post.category.name|default:"Sin categoría" }} - {{ post.publication_date|date:"d M Y" }}</p>
+            <p>{{ post.content|truncatewords:30 }}</p>
+        </li>
+        {% empty %}
+            <li>No hay posts todavía. ¡Añade uno!</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay posts para mostrar.</p>
+{% endif %}
+
+{% endblock %}

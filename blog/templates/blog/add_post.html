@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Añadir Post - ETI{% endblock %}
+
+{% block content %}
+<h2>Añadir Nuevo Post</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar Post</button>
+</form>
+<p><a href="{% url 'home' %}">Volver al inicio</a></p>
+{% endblock %}

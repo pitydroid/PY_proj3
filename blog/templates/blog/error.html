@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %} {# Hereda de tu plantilla base #}
+
+{% block title %}Error - ETI{% endblock %} {# Define un título específico #}
+
+{% block content %}
+    <h2>Ha ocurrido un Error</h2>
+    {# Muestra el mensaje que pasamos desde la vista #}
+    <p style="color: red; font-weight: bold;">{{ message }}</p>
+    <p><a href="{% url 'home' %}">Volver al inicio</a></p>
+    {# Opcional: Enlazar a la página para añadir autor #}
+    <p>Puedes <a href="{% url 'add_author' %}">añadir un autor aquí</a>.</p>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Añadir Autor - ETI{% endblock %}
+
+{% block content %}
+<h2>Añadir Nuevo Autor</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }} {# Renderiza el formulario como párrafos #}
+    <button type="submit">Guardar Autor</button>
+</form>
+<p><a href="{% url 'home' %}">Volver al inicio</a></p>
+{% endblock %}
