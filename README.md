@@ -1,6 +1,6 @@
 # El taller interior
 
-Este repositorio contiene el código fuente de "El Taller Interior", un blog dedicado a la motivación y el desarrollo personal. El proyecto está construido con Django y sirvió como ejercicio práctico para implementar características fundamentales como el patrón MVT, herencia de plantillas, modelos de base de datos, formularios de entrada y búsqueda.
+Este repositorio contiene el código fuente de "El Taller Interior", un blog dedicado a la motivación y el desarrollo personal. El proyecto está construido con Django y sirvió como ejercicio práctico para implementar funcionalidades vistas en el curso de Coderhouse: Python.
 
 ## Requisitos Previos
 
@@ -10,10 +10,9 @@ Este repositorio contiene el código fuente de "El Taller Interior", un blog ded
 
 ## Configuración e Instalación
 
-1.  **Clonar el repositorio (si está en GitHub):**
+1.  **Clonar el repositorio:**
     ```bash
-    git clone <URL_DEL_REPOSITORIO_GITHUB>
-    cd nombre-del-directorio-clonado
+    git clone https://github.com/pitydroid/PY_proj3
     ```
     O simplemente descarga y descomprime el código fuente.
 
@@ -35,18 +34,12 @@ Este repositorio contiene el código fuente de "El Taller Interior", un blog ded
     python manage.py migrate
     ```
 
-5.  **(Opcional) Crear un superusuario para acceder al admin:**
-    ```bash
-    python manage.py createsuperuser
-    ```
-    Sigue las instrucciones para crear el usuario.
-
-6.  **Iniciar el servidor de desarrollo:**
+5.  **Iniciar el servidor de desarrollo:**
     ```bash
     python manage.py runserver
     ```
 
-    El sitio estará disponible en `http://127.0.0.1:8000/`. La interfaz de administración estará en `http://127.0.0.1:8000/admin/`.
+    El sitio estará disponible en `http://127.0.0.1:8000/`.
 
 ## Orden de Prueba y Funcionalidades
 
@@ -58,7 +51,7 @@ Puedes probar las funcionalidades en el siguiente orden:
 4.  **Añadir un Post:** Navega a "Añadir Post" (`/blog/add_post/`). Selecciona un autor y (opcionalmente) una categoría de los desplegables y escribe el contenido del post.
 5.  **Ver Posts en Inicio:** Vuelve a la página de inicio. Ahora deberías ver los posts que has creado.
 6.  **Buscar Posts:** Utiliza el enlace "Buscar" (`/blog/search/`) o el formulario en la barra de navegación. Introduce un término que esté en el título de alguno de tus posts y pulsa buscar. Se mostrarán los resultados coincidentes.
-7.  **(Opcional) Explorar el Admin:** Accede a `/admin/`, inicia sesión con tu superusuario y explora cómo puedes ver, añadir, editar y eliminar Autores, Categorías y Posts directamente desde la interfaz administrativa.
+7.  **Ver Detalle de un Post**: En la página de inicio, haz clic en el título de cualquier post listado. Serás redirigido a la página individual de ese post (ej. /blog/post/1/, /blog/post/2/, etc.) donde verás su contenido completo, autor y fecha de publicación.
 
 ## Estructura
 
