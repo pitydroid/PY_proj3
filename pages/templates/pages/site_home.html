@@ -1,0 +1,19 @@
+{% extends 'pages/base.html' %}
+{% load static %} {# Carga static si usas archivos estáticos aquí #}
+
+{% block title %}Bienvenido - El Taller Interior{% endblock %}
+
+{% block content %}
+  <div style="text-align: center; padding: 40px 20px;"> {# Estilo simple #}
+    <h2>El Taller Interior</h2>
+    <p><em>Tu espacio para la motivación y el desarrollo personal.</em></p>
+    <hr style="width: 50%; margin: 20px auto;">
+    <p>Explora nuestros artículos y encuentra inspiración para tu crecimiento.</p>
+    <p style="margin-top: 30px;">
+        <a href="{% url 'page_list' %}" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Ver Artículos</a>
+        {# Reemplaza 'page_list' con el nombre correcto de tu URL de listado de páginas #}
+    </p>
+    {# Puedes añadir una imagen estática de bienvenida si quieres #}
+    {# <img src="{% static 'images/welcome_image.jpg' %}" alt="Bienvenida" style="max-width: 80%; margin-top: 20px;"> #}
+  </div>
+{% endblock %}

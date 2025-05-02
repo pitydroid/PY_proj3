@@ -1,0 +1,21 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Iniciar Sesión - El Taller Interior{% endblock %}
+
+{% block content %}
+  <h2>Iniciar Sesión</h2>
+  {% if form.errors %}
+    <p style="color: red;">Tu usuario o contraseña no son correctos. Intenta de nuevo.</p>
+  {% endif %}
+
+  <form method="post" action="{% url 'login' %}"> {# La acción apunta a la URL de login de Django #}
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }} {# Muestra el formulario de login estándar como tabla #}
+    </table>
+    <input type="hidden" name="next" value="{{ next|default:'/' }}" /> {# Para redirigir después del login #}
+    <button type="submit">Ingresar</button>
+  </form>
+  <p style="margin-top: 15px;"><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a></p>
+  <p>Si no tenes cuenta, <a href="{% url 'signup' %}">Registrate</a></p> {# 'signup' lo definimos en el paso siguiente #}
+{% endblock %}

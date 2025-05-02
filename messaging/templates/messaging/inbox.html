@@ -1,0 +1,22 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Mensajes - Bandeja de Entrada{% endblock %}
+
+{% block content %}
+  <h2>Bandeja de Entrada</h2>
+  <p>Aquí ves las conversaciones que has iniciado o en las que has participado.</p>
+  <a href="{% url 'user_list' %}" class="btn btn-info mb-3">Iniciar Nueva Conversación (Ver Usuarios)</a>
+  <hr>
+  {% if users_list %}
+    <div class="list-group">
+      {% for target_user in users_list %}
+        <a href="{% url 'conversation_detail' target_user.username %}" class="list-group-item list-group-item-action">
+          Conversación con <strong>{{ target_user.username }}</strong>
+          {# Aquí podrías añadir un contador de no leídos si implementas esa lógica #}
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No tienes conversaciones activas.</p>
+  {% endif %}
+{% endblock %}

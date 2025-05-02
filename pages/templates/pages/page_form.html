@@ -1,0 +1,35 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}
+  {% if form.instance.pk %} {# Si el objeto ya existe (Editando) #}
+    Editar Artículo - El Taller Interior
+  {% else %} {# Si es nuevo (Creando) #}
+    Crear Nuevo Artículo - El Taller Interior
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <h2>
+    {% if form.instance.pk %}
+      Editar Artículo: {{ form.instance.title }}
+    {% else %}
+      Crear Nuevo Artículo
+    {% endif %}
+  </h2>
+  <hr>
+  {# IMPORTANTE: enctype para subida de archivos (imagen) #}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {# Necesario para que los widgets de JS/CSS (como CKEditor) se carguen #}
+    {{ form.media }}
+    {# Muestra los campos del formulario (PageForm) como párrafos #}
+    {{ form.as_p }}
+    <br>
+    <button type="submit" class="btn btn-primary">
+      {% if form.instance.pk %}Guardar Cambios{% else %}Crear Artículo{% endif %}
+    </button>
+    {# Intenta volver a la página anterior o a la lista #}
+    {% url 'page_list' as list_url %} {# Define una URL fallback #}
+    <a href="{{ request.META.HTTP_REFERER|default:list_url }}" class="btn btn-secondary" style="margin-left: 10px;">Cancelar</a>
+  </form>
+{% endblock %}

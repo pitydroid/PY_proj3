@@ -34,15 +34,39 @@
     </header>
     <nav>
         <ul>
-            <li><a href="{% url 'home' %}">Inicio</a></li>
-            <li><a href="{% url 'add_author' %}">Añadir Autor</a></li>
-            <li><a href="{% url 'add_category' %}">Añadir Categoría</a></li>
-            <li><a href="{% url 'add_post' %}">Añadir Post</a></li>
-            <li><a href="{% url 'search' %}">Buscar</a></li>
+            <li><a href="{% url 'site_home' %}">Inicio</a></li>
+            <li><a href="{% url 'page_list' %}">Artículos</a></li>
+            <li><a href="{% url 'about' %}">Acerca de Mí</a></li>
+    
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'profile_view' %}">Mi Perfil</a></li>
+                <li><a href="{% url 'page_create' %}">+ Crear Artículo</a></li>
+                <li><a href="{% url 'inbox' %}">Mensajes</a></li>
+                <li>
+                    <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="background:none; border:none; padding:0; margin:0; color:#fff; text-decoration: none; cursor:pointer; font-size: inherit;">
+                            Logout ({{ user.username }})
+                        </button>
+                    </form>
+                </li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Registrarse</a></li> {# Asumiendo que tienes la URL 'signup' #}
+            {% endif %}
         </ul>
     </nav>
 
     <div class="container">
+        {% if messages %}
+            <ul class="messages" style="list-style: none; padding: 0; margin: 15px 0;">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="padding: 10px; margin-bottom: 10px; border-radius: 5px; color: #fff; background-color: {% if message.level == 40 %}#dc3545{% elif message.level == 25 %}#28a745{% else %}#17a2b8{% endif %};">
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         {% block content %}
         {% endblock %}
     </div>

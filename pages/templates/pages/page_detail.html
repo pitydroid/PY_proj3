@@ -1,0 +1,36 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}{{ page.title }} - El Taller Interior{% endblock %}
+
+{% block content %}
+  <article>
+    <h2>{{ page.title }}</h2>
+    {% if page.subtitle %}
+        <h3><em>{{ page.subtitle }}</em></h3>
+    {% endif %}
+    <p><small>Por: {{ page.author.username }} | Publicado: {{ page.publication_date|date:"d F Y, H:i" }}</small></p>
+
+    {# Mostrar imagen si existe #}
+    {% if page.image %}
+        <img src="{{ page.image.url }}" alt="{{ page.title }}" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+    {% endif %}
+
+    <hr>
+    {# Mostrar contenido enriquecido de forma segura #}
+    <div>
+        {{ page.content|safe }}
+    </div>
+  </article>
+
+  <hr>
+   {# Lógica para editar/borrar si el usuario es el autor #}
+  {% if user.is_authenticated and user == page.author %}
+      <p>
+          <a href="{% url 'page_update' pk=page.pk %}">Editar Artículo</a> |
+          <a href="{% url 'page_delete' pk=page.pk %}" style="color: red;">Borrar Artículo</a>
+          {# 'page_update' y 'page_delete' se definen en Fase 5 #}
+      </p>
+  {% endif %}
+  <p><a href="{% url 'page_list' %}">Volver a la lista de artículos</a></p>
+
+{% endblock %}

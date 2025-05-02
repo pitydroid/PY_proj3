@@ -1,0 +1,39 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Conversación con {{ other_user.username }}{% endblock %}
+
+{% block content %}
+  <h2>Conversación con {{ other_user.username }}</h2>
+  <a href="{% url 'inbox' %}">← Volver a Bandeja de Entrada</a>
+  <hr>
+
+  {# Contenedor de mensajes con scroll #}
+  <div id="message-list" style="height: 450px; overflow-y: scroll; border: 1px solid #eee; padding: 15px; margin-bottom: 20px; background-color: #f8f9fa;">
+    {% for message in messages %}
+      <div style="margin-bottom: 15px; {% if message.sender == request.user %}text-align: right;{% endif %}">
+        <div style="display: inline-block; padding: 8px 12px; border-radius: 10px; background-color: {% if message.sender == request.user %}#007bff; color: white;{% else %}#e9ecef; color: #333;{% endif %} max-width: 70%;">
+          <strong>{% if message.sender == request.user %}Yo{% else %}{{ message.sender.username }}{% endif %}</strong>
+          <small>({{ message.timestamp|date:"d/m H:i" }})</small><br>
+          {{ message.content|linebreaksbr }}
+        </div>
+      </div>
+    {% empty %}
+      <p style="text-align: center; color: #6c757d;">No hay mensajes en esta conversación. ¡Envía el primero!</p>
+    {% endfor %}
+  </div>
+
+  {# Formulario para enviar mensaje #}
+  <hr>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.content }} {# Solo muestra el campo de texto #}
+    <button type="submit" class="btn btn-primary mt-2">Enviar Mensaje</button>
+  </form>
+
+  {# Script simple para hacer scroll al final (opcional) #}
+  <script>
+    const messageList = document.getElementById('message-list');
+    messageList.scrollTop = messageList.scrollHeight;
+  </script>
+
+{% endblock %}

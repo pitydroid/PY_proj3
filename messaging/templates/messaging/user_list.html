@@ -1,0 +1,21 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Usuarios - Iniciar Conversación{% endblock %}
+
+{% block content %}
+  <h2>Usuarios Registrados</h2>
+  <p>Selecciona un usuario para iniciar una conversación.</p>
+   <a href="{% url 'inbox' %}">Volver a Bandeja de Entrada</a>
+  <hr>
+  {% if all_users %}
+    <div class="list-group">
+      {% for target_user in all_users %}
+        <a href="{% url 'conversation_detail' target_user.username %}" class="list-group-item list-group-item-action">
+          Iniciar conversación con <strong>{{ target_user.username }}</strong>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No hay otros usuarios registrados.</p>
+  {% endif %}
+{% endblock %}

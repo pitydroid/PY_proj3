@@ -14,14 +14,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# myblogproject/urls.py
 from django.contrib import admin
 from django.urls import path, include
-from django.shortcuts import redirect
+from django.conf import settings
+from django.conf.urls.static import static
+from pages import views as pages_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/', include('blog.urls')), # Incluye las URLs de la app blog
-    # Opcional: Redirigir la raíz del sitio al blog
-    path('', lambda request: redirect('home', permanent=True)),
-    # Nota: para la redirección necesitas: from django.shortcuts import redirect
+    path('pages/', include('pages.urls')),
+    path('', pages_views.site_home_view, name='site_home'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('messages/', include('messaging.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
