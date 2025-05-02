@@ -1,0 +1,23 @@
+{% extends 'pages/base.html' %} {# Asegúrate que la ruta a tu base sea correcta #}
+
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
+  <h2>Editar Perfil</h2>
+  <hr>
+  {# ¡IMPORTANTE! enctype para subida de archivos (avatar) #}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <h3>Datos de Usuario</h3>
+    {{ user_form.as_p }} {# Muestra los campos del UserUpdateForm #}
+
+    <hr style="margin: 20px 0;">
+    <h3>Datos de Perfil</h3>
+    {{ profile_form.as_p }} {# Muestra los campos del ProfileUpdateForm #}
+
+    <br>
+    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+    <a href="{% url 'profile_view' %}" class="btn btn-secondary" style="margin-left: 10px;">Cancelar</a>
+  </form>
+{% endblock %}

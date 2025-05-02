@@ -1,0 +1,29 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Mi Perfil - {{ user.username }}{% endblock %}
+
+{% block content %}
+  <h2>Perfil de {{ user.username }}</h2>
+  <hr>
+  <div style="display: flex; align-items: flex-start;">
+    {# Muestra el avatar, usando la URL del archivo guardado #}
+    <img src="{{ profile.avatar.url }}" alt="Avatar de {{ user.username }}" style="max-width: 150px; height: auto; border-radius: 10px; margin-right: 30px;">
+
+    <div>
+      <p><strong>Usuario:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Nombre:</strong> {{ user.first_name|default:"(No especificado)" }}</p>
+      <p><strong>Apellido:</strong> {{ user.last_name|default:"(No especificado)" }}</p>
+      <p><strong>Biografía:</strong><br> {{ profile.bio|linebreaksbr|default:"(No especificada)" }}</p>
+      {# Muestra otros campos del perfil si los añadiste #}
+      {# <p><strong>Sitio Web:</strong> <a href="{{ profile.website }}">{{ profile.website }}</a></p> #}
+    </div>
+  </div>
+  <hr>
+  <div style="margin-top: 20px;">
+    {# Enlace a la vista de edición (la crearemos a continuación) #}
+    <a href="{% url 'profile_edit' %}" class="btn btn-warning">Editar Perfil</a>
+    {# Enlace a la vista de cambio de contraseña (incorporada en Django) #}
+    <a href="{% url 'password_change' %}" class="btn btn-secondary" style="margin-left: 10px;">Cambiar Contraseña</a>
+  </div>
+{% endblock %}

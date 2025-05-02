@@ -1,0 +1,49 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Artículos - El Taller Interior{% endblock %}
+
+{% block content %}
+  <h2>Artículos Recientes</h2>
+  <hr>
+  {% if pages %} {# Usamos 'pages' por context_object_name #}
+      {% for page in pages %}
+          <article>
+              <h3>
+                  {# Enlace al detalle (funciona si ya definiste 'page_detail' en urls.py) #}
+                  <a href="{% url 'page_detail' pk=page.pk %}">{{ page.title }}</a>
+              </h3>
+              {% if page.subtitle %}
+                  <p><em>{{ page.subtitle }}</em></p>
+              {% endif %}
+              <p><small>Por: {{ page.author.username }} | Publicado: {{ page.publication_date|date:"d/m/Y" }}</small></p>
+              {# Mostrar miniatura si hay imagen #}
+              {% if page.image %}
+                  <img src="{{ page.image.url }}" alt="Miniatura {{ page.title }}" style="max-width: 150px; height: auto; float: left; margin-right: 15px;">
+              {% endif %}
+              {# Puedes mostrar un extracto corto del contenido (sin HTML) #}
+              <p>{{ page.content|striptags|truncatewords:40 }}</p>
+              <p style="clear: both;"><a href="{% url 'page_detail' pk=page.pk %}">Leer más...</a></p>
+              {# Lógica para editar/borrar si el usuario es el autor #}
+              {% if user.is_authenticated and user == page.author %}
+                  <p>
+                      <a href="{% url 'page_update' pk=page.pk %}">Editar</a> |
+                      <a href="{% url 'page_delete' pk=page.pk %}" style="color: red;">Borrar</a>
+                  </p>
+                  {# 'page_update' y 'page_delete' se definen en Fase 5 #}
+              {% endif %}
+          </article>
+          <hr>
+      {% endfor %}
+  {% else %}
+      {# Mensaje si no hay páginas #}
+      <p>No hay artículos publicados aún. ¡Vuelve pronto!</p>
+  {% endif %}
+
+  {# Enlace para crear nuevo artículo si está logueado #}
+  {% if user.is_authenticated %}
+      <p style="margin-top: 20px;">
+          <a href="{% url 'page_create' %}" style="padding: 10px 15px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">+ Escribir Nuevo Artículo</a>
+          {# 'page_create' se define en Fase 5 #}
+      </p>
+  {% endif %}
+{% endblock %}
