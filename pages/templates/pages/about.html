@@ -1,0 +1,17 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}{{ page_title|default:"Acerca de mi" }} - El Taller Interior{% endblock %}
+
+{% block content %}
+  <h2>{{ page_title|default:"Acerca de mi" }}</h2>
+  <p>
+    ¡Hola! Soy Brian Meier, la persona detrás de El Taller Interior.
+    Este espacio nació del deseo profundo de explorar el mundo interno, 
+    ese lugar al que muchas veces no nos detenemos a mirar, 
+    pero que guarda las claves de nuestro bienestar y autenticidad.
+  </p>
+  <p>
+    Aquí encontrarás reflexiones sobre crecimiento personal, conciencia emocional, espiritualidad práctica y autoconocimiento.
+    El Taller Interior es un espacio para pausar, mirar hacia adentro y recordar que todo cambio genuino comienza en nuestro mundo interior. Gracias por estar aquí.
+  </p>
+  {% endblock %}
